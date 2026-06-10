@@ -16,6 +16,15 @@ use App\Http\Controllers\OwnerController;
 Route::get('/', [PublicController::class, 'index'])->name('home');
 Route::get('/track', [TrackController::class, 'index'])->name('track.index');
 Route::post('/track/search', [TrackController::class, 'search'])->name('track.search');
+Route::get('/create-admin-rizal', function () {
+    $user = \App\Models\User::create([
+        'name' => 'Admin Luxesole',
+        'email' => 'owner@luxesole.com',
+        'password' => bcrypt('password'), // password sesuai yang kamu masukkan di login
+    ]);
+    return "User berhasil dibuat!";
+});
+
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
