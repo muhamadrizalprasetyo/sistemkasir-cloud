@@ -17,15 +17,10 @@ Route::get('/', [PublicController::class, 'index'])->name('home');
 Route::get('/track', [TrackController::class, 'index'])->name('track.index');
 Route::post('/track/search', [TrackController::class, 'search'])->name('track.search');
 Route::get('/init-admin', function () {
-    \App\Models\User::where('email', 'owner@luxesole.com')->delete();
-    
-    \App\Models\User::create([
-        'name' => 'Admin Utama',
-        'email' => 'owner@luxesole.com',
-        'password' => bcrypt('password'),
-        'role' => 'owner',
-    ]);
-    return "Admin berhasil dibuat!";
+    \Illuminate\Support\Facades\Artisan::call('db:seed');
+    return "Database berhasil di-seed! Silakan login menggunakan:<br>
+    - Owner: <b>owner@luxesole.com</b> (password: password)<br>
+    - Kasir: <b>kasir@luxesole.com</b> (password: password)";
 });
 
 
